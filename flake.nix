@@ -16,7 +16,7 @@
 
       devShells.${system}.default = pkgs.mkShell {
         name = "pyenv Cli Environment";
-        buildInputs = [pkgs.pyenv];
+        buildInputs = [pkgs.zlib pkgs.pyenv];
       };
  
   };
