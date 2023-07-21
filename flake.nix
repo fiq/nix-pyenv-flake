@@ -8,12 +8,13 @@
       "rev" = "b81204c08bf8ef8ab2ea0daeb721ee08020a26a0";
 #      "sha256" = "12h96h2fz805r02z4nal4hbasjf8cbbdq7bawbxcvl5pf1g9rwhk";
     };
-
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system}.pkgs;
   in {
 
     defaultPackage.x86_64-linux = 
-      with import nixpkgs { system = "x86_64-linux"; };
-      stdenv.mkDerivation {
+      with import nixpkgs { system = "${system}"; };
+      pyenv = stdenv.mkDerivation {
         pname = "pyenv";
         version = "2.3.22";
         src = pyenvRepo;    
@@ -29,5 +30,11 @@
            echo To be impure, please Run 'mkdir ~/.pyenv-nix' and add 'export PYENV_ROOT=$HOME/.pyenv-nix' to your profile
         '';
       };
+
+      devShells.${system}.default = pkgs.mkShell {
+        name = "pyenv Cli Environment";
+        buildInputs = [pyenv];
+      };
+ 
   };
 }
