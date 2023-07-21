@@ -2,6 +2,7 @@
 
 Sometimes we need to be dirty and use our existing tool chain.
 
+This is an (impure) nix flake and overlay so that you can use pyenv.
 
 # Install
 
