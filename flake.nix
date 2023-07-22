@@ -12,11 +12,20 @@
     };
 
  
-  in {
+  in rec {
 
-      devShells.${system}.default = pkgs.mkShell {
+      devShells.${system}.default = pkgs.mkShell rec  {
         name = "pyenv Cli Environment";
-        buildInputs = [pkgs.zlib pkgs.pyenv];
+        nativeBuildInputs = with pkgs; [
+          pkg-config
+        ];
+        buildInputs = with pkgs; [
+          bzip2 expat xz libffi libxcrypt gdbm sqlite readline ncurses openssl
+          pyenv
+        ];
+        shellHook = ''
+          export LD_LIBRARY_PATH=${pkgs.zlib}/lib;
+        '';
       };
  
   };
