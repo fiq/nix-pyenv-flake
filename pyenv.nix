@@ -15,7 +15,7 @@ in
     pname = "pyenv";
     version = "2.3.22";
     src = pyenvRepo;    
-    nativeBuildInputs = [pkgs.bats pkgs.git];
+    nativeBuildInputs = [pkgs.bats pkgs.git zlib];
     dontConfigure = true;
     dontBuild = true;
     installPhase = ''
