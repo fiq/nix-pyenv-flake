@@ -25,6 +25,8 @@
         ];
         shellHook = ''
           export LD_LIBRARY_PATH=${pkgs.zlib}/lib;
+          mkdir -p ~/.pyenv
+          export PYENV_ROOT=$HOME/.pyenv
         '';
       };
  

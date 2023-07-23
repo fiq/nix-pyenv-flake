@@ -5,23 +5,22 @@
   }) {}
 }:
 let 
-  pyenvRepo = builtins.fetchGit{
-    "url" =  "https://github.com/pyenv/pyenv";
-    "rev" = "b81204c08bf8ef8ab2ea0daeb721ee08020a26a0";
-#    "sha256" = "12h96h2fz805r02z4nal4hbasjf8cbbdq7bawbxcvl5pf1g9rwhk";
+  pyenvRepo = builtins.fetchTarball{
+    "url" =  "https://github.com/pyenv/pyenv/archive/refs/tags/v2.3.23.tar.gz";
+    "sha256" = "0mr9q4bpc9906mc338cs58ksm0ld6bnkvvjp8752w45kz2gnxz42";
   };
 in
   pkgs.stdenv.mkDerivation rec {
     pname = "pyenv";
-    version = "2.3.22";
+    version = "2.3.23";
     src = pyenvRepo;    
-    nativeBuildInputs = [pkgs.bats pkgs.git zlib];
+    nativeBuildInputs = [pkgs.bats pkgs.git pkgs.zlib.dev];
     dontConfigure = true;
     dontBuild = true;
     installPhase = ''
        mkdir -p $out
        # Copy clone to $out
-       cp -r ${pyenvRepo.outPath}/* $out
+       cp -r ${pyenvRepo}/* $out
        
        # Remind the user to set PYENV_ROOT
        echo To be impure, please Run 'mkdir ~/.pyenv-nix' and add 'export PYENV_ROOT=$HOME/.pyenv-nix' to your profile
