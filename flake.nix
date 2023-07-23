@@ -20,30 +20,20 @@
           pkg-config zlib.dev zlib.dev 
           bzip2.dev expat.dev 
           xz.dev sqlite.dev readline.dev 
-          openssl.dev
+          openssl.dev tk
         ];
         buildInputs = with pkgs; [
           pyenv
-          zlib
+          zlib tk
           bzip2 expat xz libffi libxcrypt gdbm sqlite readline ncurses openssl
- 
         ];
         shellHook = ''
-          export LD_LIBRARY_PATH=${pkgs.zlib}/lib:$LD_LIBRARY_PATH;
-          export LD_LIBRARY_PATH=${pkgs.sqlite}/lib:$LD_LIBRARY_PATH;
-          export LD_LIBRARY_PATH=${pkgs.bzip2}/lib:$LD_LIBRARY_PATH;
-          export LD_LIBRARY_PATH=${pkgs.xz}/lib:$LD_LIBRARY_PATH;
-          
-          export LDFLAGS="-L${pkgs.zlib}/lib $LDFLAGS";
-          export LDFLAGS="-L${pkgs.sqlite}/lib $LDFLAGS";
-          export LDFLAGS="-L${pkgs.bzip2}/lib $LDFLAGS";
-          export LDFLAGS="-L${pkgs.xz}/lib $LDFLAGS";
+          export PKG_CONFIG_BIN=${pkgs.pkg-config}/bin/pkg-config;
 
-          export CPPFLAGS="-I${pkgs.zlib.dev}/include $CPPFLAGS";
-          export CFLAGS="-I${pkgs.zlib.dev}/include $CFLAGS";
-          export CFLAGS="-I${pkgs.sqlite.dev}/include $CFLAGS"
-          export CFLAGS="-I${pkgs.bzip2.dev}/include $CFLAGS"
-          export CFLAGS="-I${pkgs.xz.dev}/include $CFLAGS";
+          export LD_LIBRARY_PATH="$($PKG_CONFIG_BIN --variable=libdir tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline|sed -e's/\s/:/g') $LDFLAGS";
+          export LDFLAGS="$($PKG_CONFIG_BIN --libs tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $LDFLAGS";
+          export CPPFLAGS="$($PKG_CONFIG_BIN --cflags tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $CPPFLAGS";
+          export CFLAGS="$($PKG_CONFIG_BIN --cflags tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $CFLAGS";
 
           mkdir -p ~/.pyenv
           export PYENV_ROOT=$HOME/.pyenv
