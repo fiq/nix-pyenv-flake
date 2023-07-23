@@ -1,4 +1,4 @@
-# pyenv Nix Overlay (IMPURE)
+# pyenv Nix Overlay (👹IMPURE🐍)
 
 Sometimes we need to be dirty and use our existing tool chain.
 
