@@ -13,11 +13,15 @@ To use pyenv in nix:
 
 This will give you a new shell using the local derivation of pyenv.
 
-In order to persist python versions, you must set the following environmentals in your shell.
+In order to persist python versions, the flake will default your PYENV_ROOT (where python versions are stored)
+to $HOME/.pyenv 
+
+You may create an alternate pyenv by setting it before invoking the flake.
 
 ```
-mkdir -p ~/.pyenv
-export PYENV_ROOT=$HOME/.pyenv
+mkdir -p ~/.pyenv-other
+export PYENV_ROOT=$HOME/.pyenv-other
+nix develop . --impure
 
 ```
 

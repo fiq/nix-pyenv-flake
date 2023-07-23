@@ -35,8 +35,12 @@
           export CPPFLAGS="$($PKG_CONFIG_BIN --cflags tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $CPPFLAGS";
           export CFLAGS="$($PKG_CONFIG_BIN --cflags tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $CFLAGS";
 
-          mkdir -p ~/.pyenv
-          export PYENV_ROOT=$HOME/.pyenv
+          if [[ -z "$PYENV_ROOT" ]]; then
+            PYENV_ROOT=$HOME/.pyenv
+            echo "Using default PYENV_ROOT: $PYENV_ROOT";
+          fi
+          export PYENV_ROOT;
+          mkdir -p $PYENV_ROOT
         '';
       };
  
