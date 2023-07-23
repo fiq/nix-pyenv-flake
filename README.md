@@ -8,10 +8,17 @@ This is an (impure) nix flake and overlay so that you can use pyenv.
 
 To use pyenv in nix:
 
+```
+nix develop github:fiq/nix-pyenv-flake --impure
+```
 
-`nix develop . --impure`
+Or clone and run `nix develop . --impure`
 
 This will give you a new shell using the local derivation of pyenv.
+
+Now go forth and be an impure pythonista.
+
+# Python Downloads Folder (PYENV_ROOT)
 
 In order to persist python versions, the flake will default your PYENV_ROOT (where python versions are stored)
 to $HOME/.pyenv 
@@ -27,4 +34,3 @@ nix develop . --impure
 
 Change as appropriate.
 
-Now go forth and be an impure pythonista.
