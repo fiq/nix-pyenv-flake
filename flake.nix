@@ -21,6 +21,7 @@
           bzip2.dev expat.dev 
           xz.dev sqlite.dev readline.dev 
           openssl.dev tk
+          curl
         ];
         buildInputs = with pkgs; [
           pyenv
