@@ -31,6 +31,7 @@
           export PKG_CONFIG_BIN=${pkgs.pkg-config}/bin/pkg-config;
 
           export LD_LIBRARY_PATH="$($PKG_CONFIG_BIN --variable=libdir tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline|sed -e's/\s/:/g') $LDFLAGS";
+          export LD_LIRBARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib":$LD_LIBRARY_PATH;
           export LDFLAGS="$($PKG_CONFIG_BIN --libs tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $LDFLAGS";
           export CPPFLAGS="$($PKG_CONFIG_BIN --cflags tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $CPPFLAGS";
           export CFLAGS="$($PKG_CONFIG_BIN --cflags tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $CFLAGS";
@@ -40,7 +41,8 @@
             echo "Using default PYENV_ROOT: $PYENV_ROOT";
           fi
           export PYENV_ROOT;
-          mkdir -p $PYENV_ROOT
+          export PATH=$PYENV_ROOT/shims:$PATH;
+          mkdir -p $PYENV_ROOT;
         '';
       };
  
