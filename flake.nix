@@ -26,7 +26,7 @@
         buildInputs = with pkgs; [
           pyenv
           zlib tk
-          bzip2 expat xz libffi libxcrypt gdbm sqlite readline ncurses openssl
+          bzip2 expat xz libffi libxcrypt gdbm sqlite readline ncurses openssl libffi
         ];
         shellHook = ''
           export PKG_CONFIG_BIN=${pkgs.pkg-config}/bin/pkg-config;
