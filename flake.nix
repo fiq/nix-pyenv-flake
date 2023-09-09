@@ -33,6 +33,7 @@
 
           export LD_LIBRARY_PATH="$($PKG_CONFIG_BIN --variable=libdir tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline|sed -e's/\s/:/g') $LDFLAGS";
           export LD_LIRBARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib":$LD_LIBRARY_PATH;
+          export LD_LIBRARY_PATH="${pkgs.gcc-unwrapped.lib}/lib":$LD_LIRBARY_PATH;
           export LDFLAGS="$($PKG_CONFIG_BIN --libs tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $LDFLAGS";
           export CPPFLAGS="$($PKG_CONFIG_BIN --cflags tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $CPPFLAGS";
           export CFLAGS="$($PKG_CONFIG_BIN --cflags tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline) $CFLAGS";
