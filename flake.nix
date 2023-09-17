@@ -26,12 +26,13 @@
         buildInputs = with pkgs; [
           pyenv
           zlib tk
-          bzip2 expat xz libffi libxcrypt gdbm sqlite readline ncurses openssl libffi cudatoolkit linuxPackages.nvidia_x11
+          bzip2 expat xz libffi libxcrypt gdbm sqlite readline ncurses openssl libffi
+          cudatoolkit linuxPackages.nvidia_x11 cudaPackages.cuda_cudart openblas
         ];
         shellHook = ''
           export PKG_CONFIG_BIN=${pkgs.pkg-config}/bin/pkg-config;
 
-          export LD_LIBRARY_PATH="$($PKG_CONFIG_BIN --variable=libdir tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline|sed -e's/\s/:/g') $LDFLAGS";
+          export LD_LIBRARY_PATH="$($PKG_CONFIG_BIN --variable=libdir tk libffi openssl zlib bzip2 sqlite3 liblzma ncurses readline openblas|sed -e's/\s/:/g') $LDFLAGS";
           export LD_LIRBARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib":$LD_LIBRARY_PATH;
           export LD_LIBRARY_PATH="${pkgs.gcc-unwrapped.lib}/lib":$LD_LIRBARY_PATH;
           export LD_LIBRARY_PATH="${pkgs.cudatoolkit.lib}/lib":$LD_LIRBARY_PATH;
