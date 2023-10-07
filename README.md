@@ -1,4 +1,4 @@
-# pyenv Nix Overlay (👹IMPURE🐍)
+# pyenv Nix Overlay and Flake (👹IMPURE🐍)
 
 Setups up _all the things_ for you to do python dev, particularly for ML, and just use `pip` directly on nixos.
 
