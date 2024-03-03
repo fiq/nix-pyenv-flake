@@ -2,6 +2,12 @@
 
 Setups up _all the things_ for you to do python dev, particularly for ML, and just use `pip` directly on nixos.
 
+# WARNING
+
+As we're playing outside the repeatability of Nix and /nix paths of nix-managed libraries, you may need to 
+`pyenv uninstall` and `pyenv install` specific versions of local shared libraries if this were linked against. 
+This can be an issue if you haev upgraded libraries outside of this flake.
+
 # When would I need this?
 
 - For when you need to get stuff done and don't want to be faffing with your `default.nix` or `flake.nix` on a NixOS system
