@@ -1,6 +1,6 @@
 {
   description = "A flake for a local impure pyenv";
-  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-23.11;
+  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-24.11;
 
   outputs = {self, nixpkgs} @inputs: let
     system = "x86_64-linux";
